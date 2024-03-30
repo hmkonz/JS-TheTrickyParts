@@ -17,9 +17,13 @@ function createAccount(pin, balance = 0) {
         balance += depositAmount;
         return `Succesfully deposited $${depositAmount}. Current balance: $${balance}.`;
       }
-      // otherwise, return "Invalid PIN"
+      // if PIN is invalid, return "Invalid PIN"
       else if (inputPin !== pin) {
         return "Invalid PIN.";
+      }
+      // if no depositAmount is included,
+      else if (!depositAmount) {
+        return "No money was included with deposit. Transaction cancelled!";
       }
     },
     withdraw(inputPin, withdrawalAmount) {
@@ -38,6 +42,10 @@ function createAccount(pin, balance = 0) {
       // otherwise, return "Invalid PIN"
       else if (inputPin !== pin) {
         return "Invalid PIN.";
+      }
+      // if no withdrawalAmount is included,
+      else if (!withdrawalAmount) {
+        return "No amount was included with withdrawal. Transaction cancelled!";
       }
     },
     changePin(oldPin, newPin) {
